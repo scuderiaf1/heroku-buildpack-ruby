@@ -60,6 +60,7 @@ class LanguagePack::Ruby < LanguagePack::Base
     instrument "ruby.default_config_vars" do
       vars = {
         "LANG" => env("LANG") || "en_US.UTF-8"
+        "LD_LIBRARY_PATH" => "vendor/freetds/lib:$LD_LIBRARY_PATH"
       }
 
       ruby_version.jruby? ? vars.merge({
@@ -336,6 +337,7 @@ SHELL
       set_env_default  "LANG",     "en_US.UTF-8"
       set_env_override "GEM_PATH", "$HOME/#{slug_vendor_base}:$GEM_PATH"
       set_env_override "PATH",      profiled_path.join(":")
+      set_env_override "LD_LIBRARY_PATH", "vendor/freetds/lib:$LD_LIBRARY_PATH"
 
       add_to_profiled set_default_web_concurrency if env("SENSIBLE_DEFAULTS")
 
@@ -584,6 +586,14 @@ WARNING
         Dir.mktmpdir("libyaml-") do |tmpdir|
           libyaml_dir = "#{tmpdir}/#{LIBYAML_PATH}"
           install_libyaml(libyaml_dir)
+
+          # freetds_dir = "#{tmpdir}/freetds"
+          # `mkdir -p #{tmpdir}/freetds`
+
+          # `curl https://s3.amazonaws.com/firmhouse/freetds-0.tgz -o - | tar -xz -C #{tmpdir}/freetds -f -`
+
+          # freetds_include = File.expand_path("#{freetds_dir}/include")
+          # freetds_lib = File.expand_path("#{freetds_dir}/lib")
 
           # need to setup compile environment for the psych gem
           yaml_include   = File.expand_path("#{libyaml_dir}/include").shellescape
