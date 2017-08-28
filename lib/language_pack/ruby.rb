@@ -60,7 +60,7 @@ class LanguagePack::Ruby < LanguagePack::Base
     instrument "ruby.default_config_vars" do
       vars = {
         "LANG" => env("LANG") || "en_US.UTF-8"
-        "LD_LIBRARY_PATH" => "vendor/freetds/lib:$LD_LIBRARY_PATH"
+        "LD_LIBRARY_PATH" => env"("LD_LIBRARY_PATH") || "vendor/freetds/lib:$LD_LIBRARY_PATH"
       }
 
       ruby_version.jruby? ? vars.merge({
