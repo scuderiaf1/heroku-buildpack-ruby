@@ -316,6 +316,7 @@ SHELL
       paths = ENV["PATH"].split(":")
       set_export_override "GEM_PATH", "#{build_path}/#{slug_vendor_base}:$GEM_PATH"
       set_export_default  "LANG",     "en_US.UTF-8"
+      set_env_override "LD_LIBRARY_PATH", "vendor/freetds/lib:$LD_LIBRARY_PATH"
       set_export_override "PATH",     paths.map { |path| /^\/.*/ !~ path ? "#{build_path}/#{path}" : path }.join(":")
 
       if ruby_version.jruby?
