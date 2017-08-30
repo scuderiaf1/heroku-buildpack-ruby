@@ -102,7 +102,7 @@ WARNING
       setup_profiled
       allow_git do
         install_bundler_in_app
-        build_bundler("development:test:sqlserver")
+        build_bundler("development:test:sqlserver:odbc")
         post_bundler
         create_database_yml
         install_binaries
