@@ -738,6 +738,14 @@ params = CGI.parse(uri.query || "")
   <%= attribute "host",     host %>
   <%= attribute "port",     port %>
 
+form_reporting_<%= ENV["RAILS_ENV"] || ENV["RACK_ENV"] %>:
+  <%= attribute "adapter",  adapter %>
+  <%= attribute "database", database %>
+  <%= attribute "username", username %>
+  <%= attribute "password", password, true %>
+  <%= attribute "host",     host %>
+  <%= attribute "port",     port %>
+
 <% params.each do |key, value| %>
   <%= key %>: <%= value.first %>
 <% end %>
