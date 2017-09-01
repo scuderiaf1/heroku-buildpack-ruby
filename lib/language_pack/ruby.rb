@@ -716,6 +716,7 @@ end
 
 adapter = uri.scheme
 adapter = "postgresql" if adapter == "postgres"
+adapter = "mysql2" if adapter == "mysql"
 
 database = (uri.path || "").split("/")[1]
 
